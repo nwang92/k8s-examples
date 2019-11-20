@@ -42,7 +42,7 @@ spec:
     port: 80
     targetPort: 8080
   selector:
-    app: hack-container
+    app: cloud-identifier
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
