@@ -49,8 +49,10 @@ kind: Ingress
 metadata:
   name: cloud-identifier-ingress
   namespace: default
+  # https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/tls.md#server-side-https-enforcement-through-redirect
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
   - http:
