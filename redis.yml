@@ -1,0 +1,194 @@
+# Certificates generated with:
+# $ openssl genrsa -des3 -passout pass:abcd -out rootCA.key 4096
+# $ openssl req -x509 -new -passin pass:abcd -subj /CN=redis -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
+# $ openssl genrsa -out server.key 2048
+# $ openssl req -new -sha256 -key server.key -subj "/C=US/ST=CA/O=MyOrg, Inc./CN=redis" -out server.csr
+# $ openssl x509 -req -passin pass:abcd -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 500 -sha256
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-root-ca
+  namespace: quota
+data:
+  rootCA.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIEnDCCAoQCCQC4LLKuHc92gDANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVy
+    ZWRpczAeFw0yMTA2MDQyMzA0MTZaFw0yNDAzMjQyMzA0MTZaMBAxDjAMBgNVBAMM
+    BXJlZGlzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAooIkNviBaHMq
+    nQgqw+ruXZGw+BBP5e7Zksax10741x+2vf6A04tJA3lQgT4TeROnp1cKcemGMLqB
+    yFQ2KWpeLiU/mc8njInrSJ/KbShbe4cDNTCzHnlytjeE55GI+mWxhgMoCrveysn1
+    QCx3H5re8cMHXsPuIYf+j5FPrNEeY3LYkGYaOiYlvu/S+7j9OuXF/nYVkuFMbf91
+    rjgye80yZPnbjDZTpEu8PywPfwSuSndRPlFdnsouN0lEYPqMTgcy+1IIKFujnRAk
+    HfD07NdKeoTpHXONf204EkhK0ptFUFn/cxkoBzJ0Lf4bU1TuYTugnXqZt9GmGJZw
+    Yfge9RJxv1tqXgcd2/Ctbi1thVLXUaFQb/g554IyG0v0i11VWgfrGSHVL8izEAFP
+    O8PHeozw4yKqNx29/RTpt7BsT7c9y59AKvsLVtNGBeBYeDE5fXMFm5ZO4nDhihEZ
+    O/U0F0WE/VFWxdP3GGm2SMeQH2y3By1V5ybyhBejIy+wmfR0aCUVKe0fj+w66WRh
+    38rf6CsOPN71Bgxep8mpZH+KEKU8OGRhZ0A00lNWxE0CB5mc//guVCEjBnM0u8bB
+    FuMGMw3hUNqMxs9MdYjRhg8qz3pHwMUgERDzAxrJ3s+v4nZCDTZTHo95KWgBPaCJ
+    wB+B2+NFl+HfMdkMekdpxOs+QLLw71UCAwEAATANBgkqhkiG9w0BAQsFAAOCAgEA
+    Mg0fyt2DBVpMIUw1R9FovEF1PyNULQTr6na3F16yMArKWZcfPWJO4hdbxtJeCm6E
+    6/6Tk/ULhGMXWMSeNdgj84Jkiu7mrrvJWJqkPmhhd5Vnc4+9M+KGd20Pyi2cNAJX
+    qqSftjPtOEUMUxGzAgVmidg/C591mtH2A/MMEFbBDidYl7pAQ6fs6TDbLM/pCGRD
+    ggaJ70lvHRGxtiOBPZNXV08aURcnX+G8E9MTEz7A+obBm9SXxdVE8Qwo0uSEwAMI
+    qaYNDhcYESd65IvCwSgCaZNpzqjIk9ThxqASbvObwnD+O2jBeQplQEVdrs8nbr1G
+    qFSpuLjP9zoc4Z79AOEmvKDqR4VoDFBbvBYo1u0zpU8th2Rjb+SyHweh3ZZr/i41
+    S7qP/1BRPVrvchsrmZb1+lBgVYHhvw8b31rVN0iZ9qNS0fFs1tnt8Vi3Eznjdvrg
+    +8yarmCUbF8Cbd+aM4hQ1V97MAhEraOyFOltoN3xdcd99BFMxkMVRlZHM9klCACu
+    bQCWk6/vl5X9T4FxNJvAAUkoSS4EpIBSN/MKv3jAVgjFL8Jc9Eg75iPFs1YfBiln
+    Y2VW7Lacu4u4R6tgohagORvaOxsXcaade+KRhWPkBZKHUkbwqMMBi+q+5UyMT2xE
+    XU1FbMdW+MoTo1VYjid32bvWwgf/F0ewjGyVPhtkzuY=
+    -----END CERTIFICATE-----
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-certs
+  namespace: quota
+data:
+  rootCA.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIEnDCCAoQCCQC4LLKuHc92gDANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVy
+    ZWRpczAeFw0yMTA2MDQyMzA0MTZaFw0yNDAzMjQyMzA0MTZaMBAxDjAMBgNVBAMM
+    BXJlZGlzMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAooIkNviBaHMq
+    nQgqw+ruXZGw+BBP5e7Zksax10741x+2vf6A04tJA3lQgT4TeROnp1cKcemGMLqB
+    yFQ2KWpeLiU/mc8njInrSJ/KbShbe4cDNTCzHnlytjeE55GI+mWxhgMoCrveysn1
+    QCx3H5re8cMHXsPuIYf+j5FPrNEeY3LYkGYaOiYlvu/S+7j9OuXF/nYVkuFMbf91
+    rjgye80yZPnbjDZTpEu8PywPfwSuSndRPlFdnsouN0lEYPqMTgcy+1IIKFujnRAk
+    HfD07NdKeoTpHXONf204EkhK0ptFUFn/cxkoBzJ0Lf4bU1TuYTugnXqZt9GmGJZw
+    Yfge9RJxv1tqXgcd2/Ctbi1thVLXUaFQb/g554IyG0v0i11VWgfrGSHVL8izEAFP
+    O8PHeozw4yKqNx29/RTpt7BsT7c9y59AKvsLVtNGBeBYeDE5fXMFm5ZO4nDhihEZ
+    O/U0F0WE/VFWxdP3GGm2SMeQH2y3By1V5ybyhBejIy+wmfR0aCUVKe0fj+w66WRh
+    38rf6CsOPN71Bgxep8mpZH+KEKU8OGRhZ0A00lNWxE0CB5mc//guVCEjBnM0u8bB
+    FuMGMw3hUNqMxs9MdYjRhg8qz3pHwMUgERDzAxrJ3s+v4nZCDTZTHo95KWgBPaCJ
+    wB+B2+NFl+HfMdkMekdpxOs+QLLw71UCAwEAATANBgkqhkiG9w0BAQsFAAOCAgEA
+    Mg0fyt2DBVpMIUw1R9FovEF1PyNULQTr6na3F16yMArKWZcfPWJO4hdbxtJeCm6E
+    6/6Tk/ULhGMXWMSeNdgj84Jkiu7mrrvJWJqkPmhhd5Vnc4+9M+KGd20Pyi2cNAJX
+    qqSftjPtOEUMUxGzAgVmidg/C591mtH2A/MMEFbBDidYl7pAQ6fs6TDbLM/pCGRD
+    ggaJ70lvHRGxtiOBPZNXV08aURcnX+G8E9MTEz7A+obBm9SXxdVE8Qwo0uSEwAMI
+    qaYNDhcYESd65IvCwSgCaZNpzqjIk9ThxqASbvObwnD+O2jBeQplQEVdrs8nbr1G
+    qFSpuLjP9zoc4Z79AOEmvKDqR4VoDFBbvBYo1u0zpU8th2Rjb+SyHweh3ZZr/i41
+    S7qP/1BRPVrvchsrmZb1+lBgVYHhvw8b31rVN0iZ9qNS0fFs1tnt8Vi3Eznjdvrg
+    +8yarmCUbF8Cbd+aM4hQ1V97MAhEraOyFOltoN3xdcd99BFMxkMVRlZHM9klCACu
+    bQCWk6/vl5X9T4FxNJvAAUkoSS4EpIBSN/MKv3jAVgjFL8Jc9Eg75iPFs1YfBiln
+    Y2VW7Lacu4u4R6tgohagORvaOxsXcaade+KRhWPkBZKHUkbwqMMBi+q+5UyMT2xE
+    XU1FbMdW+MoTo1VYjid32bvWwgf/F0ewjGyVPhtkzuY=
+    -----END CERTIFICATE-----
+  server.key: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEpAIBAAKCAQEAzVHvfvVHpW9Y2wGZIsycVIvhdQ1NzYF9d/1y4ZW1rd+Qf28i
+    iqblGpbFTeJrM5DowGZq3QnuhZQrvYaRuqyXjNKWep2SHKesau8LicsMdt/PSxFl
+    iboM/ZsCU/1N5zqUPeX2n8oNkj302e3Z0d/5YjzZqmRcwQiURQmerjy+j2HZewZx
+    +XKMpUHBsIwBhFTCcRe+Bv+vcs5wGwwa7BqV+dsiogRWpj3eGBjV2ZWENbm+zC9A
+    i3NbcV8G5aA6qFd4toj8mT/HlsL00P0g4Dxea2cAWIwAvcumB+Dx5zSZ0i3G7GkQ
+    hZHJto9KKSFKa1N8Jl/xRaM00brM7sWgNqWgewIDAQABAoIBAQCMeCMXQ+4pg91R
+    sG05fqzxtuWftGNnVtElV3PSXB94/nwYg0spevdBUqdYGrDnDZv/jdJMuW/DWdT3
+    DGsFQPFKOgUTjFwbWKfAXR0Sv6Ueaw6iOBu0t2IN25AjMCitKsmi84LgXVcdl1+9
+    /VlJmic/C4yLY7CFrD3sYaF7aTmiU78c1hbi5Ds65sSWuXUH1Kj7YP0PU+C0eWj0
+    GeM4/eye6LgNShp79Y+EAGsiE9F8OmiwH7lkbKlI7V8ia+6AdHr4j9IUx0CP+K9y
+    fdMx6dYVszJUiY3AkCq5iR2zK5Y3hDcro32c5q23ydTV48CAmE8ZahsyhnqbrK2u
+    3lDXs5N5AoGBAP4im7fCZ0d2KmY5B6WHiLJIwJZ4Y/7Vrw/ZqCFszafTK+fS7qLV
+    WjkrWyT2uOMY3pc6CXrM7uXMjUjwlj31NOQcHUrkzHVwsyjynaSDJpELfzFM84qR
+    57Grw8ktY3LK4e4i5RnQebNGjgQTqin/O5AFxBVx/Q3+3D1qhGDmvxNPAoGBAM7T
+    oNatZaQAhK5skk8oDIOJTmY01Mv9OD0dpkcqTSHgA+Q2Oi6g43zEIohZ4kF6Jqt5
+    3jv6JdqHUG/hRx6ysg8+mb5vDfCX+7x698MG2P7OFlGaEqUOygr4rsHq7di3J37r
+    W6iNdOMxA4xeyMbn1onCPt6APWFaBNu98cKkv4UVAoGBAK5vouLnFWz/tuqjipQc
+    C8AUH90olbp9gcQnajhHLoJbeG+PYS1ztJI5KD6e+xkmIOM8evVHZVNmrDO8r+On
+    Q76vbYvSsGSMDu20WnBpdTdp5Mw6PZCHxbk2ZRTZisFocNu8J/UoG+DqNOCnfs2E
+    26Vnz8fIjiHlJdciHetFdzIRAoGAR03Ki3hoLCxJkeC4aDXEaqyxrKbWHiWEd/16
+    z9oTkXQro0fWszCgfOkZhqyGRlCYeFGhfkf1OOuhnZCq9jhhDsRkOLUMtz+OeCJk
+    vIXl1aKzKxrVBracjT/C7/PQYAB0y1rU1L0/6PuC36flzD0tR30CM68+eguQ1Tkc
+    2h/2LykCgYBjf/0oQKZD1rynLPF5/6XYwJOVpgV1yiTG3kSdr5YiBxEGW8LM7vQO
+    Oy2rJvIT2RPpCIDSGXzL7yZ7inLMn1EpI1Osr19f5siJuXuLd+BuoaoJddN10ch9
+    VTavuTrjxJAX/zGALtUMwEcTmj0ipveXdWcGhx/T3dl1IYF8b29AGQ==
+    -----END RSA PRIVATE KEY-----
+  server.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDzDCCAbQCCQCRFKjw9ht1lTANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVy
+    ZWRpczAeFw0yMTA2MDQyMzA0MzBaFw0yMjEwMTcyMzA0MzBaMEAxCzAJBgNVBAYT
+    AlVTMQswCQYDVQQIDAJDQTEUMBIGA1UECgwLTXlPcmcsIEluYy4xDjAMBgNVBAMM
+    BXJlZGlzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzVHvfvVHpW9Y
+    2wGZIsycVIvhdQ1NzYF9d/1y4ZW1rd+Qf28iiqblGpbFTeJrM5DowGZq3QnuhZQr
+    vYaRuqyXjNKWep2SHKesau8LicsMdt/PSxFliboM/ZsCU/1N5zqUPeX2n8oNkj30
+    2e3Z0d/5YjzZqmRcwQiURQmerjy+j2HZewZx+XKMpUHBsIwBhFTCcRe+Bv+vcs5w
+    Gwwa7BqV+dsiogRWpj3eGBjV2ZWENbm+zC9Ai3NbcV8G5aA6qFd4toj8mT/HlsL0
+    0P0g4Dxea2cAWIwAvcumB+Dx5zSZ0i3G7GkQhZHJto9KKSFKa1N8Jl/xRaM00brM
+    7sWgNqWgewIDAQABMA0GCSqGSIb3DQEBCwUAA4ICAQCPIpK18005kNFQO0zhO2Y9
+    6VGa7WaqrkRa1RuI9QGfVe1Fao67PSGk0p71tAhuPQEcO5Alr37aXQiH9GR8X/js
+    UAcX+bg6nURw95MGfE3zu4GERd+sK7kJ6vM+9Nqg/JmXNFD5ctn9dZ9ET9ncZ7Iw
+    5UoAiUqAJzGfnT/SYK6v0bqCHvmZlb+bHbT1MD18zhT+Mz0lcocEQ9ZXDT51v+QP
+    s03ks2osu7K9zHv4khlT9TQhUO0mu9ee6wACY+JbIP0AKJLGbJUAhxQgCo0+4BTN
+    zyxyDiGc0BrDzOdnEf/McnoK6TgEMUBp3Fgump48IrMZ6CF1GOZipRPpEkgpgFjT
+    iABrHsd3hgnWMj518OAu6UoQQZyQKh+13/vh3Pn778vU4sgYIf5AoulWw5Kwp0Xq
+    oLvWNvn86ng0wQSlcMQvThs9ayf8XdP1qKZBEoYB8NHB+vl99aO81HcRMAQo1mej
+    azQLsx/qg0b1LA8cnT2MuYPJHjGTIpjBAhwirILeUAthGQX4hXBNuMgD+a/QvUC6
+    FJyiZPKsahekddgjT6MKp1NQEmg4MpQCmSI4uk56+Bcv83W2TJbrZWWPFCh57g2s
+    r/cwVr+vnERI+g/xDwtgSGGW5UThSdPUyrBr+rtgh270zFTJpiIUcifmAkcOzS/Y
+    iu7Ubgd80K805qaTnaIO2A==
+    -----END CERTIFICATE-----
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: quota
+data:
+  redis.conf: |
+    bind 0.0.0.0
+    tls-port 16379
+    tls-cert-file /certs/server.crt
+    tls-key-file /certs/server.key
+    tls-auth-clients no
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: quota
+spec:
+  selector:
+    app: redis
+  # type: NodePort
+  ports:
+  - protocol: TCP
+    port: 16379
+    # targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: quota
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine3.13
+        command:
+          - redis-server
+          - "/config/redis.conf"
+        ports:
+        - containerPort: 16379
+        volumeMounts:
+        - name: redis-certs
+          mountPath: /certs
+        - name: redis-config
+          mountPath: /config
+      volumes:
+      - name: redis-certs
+        configMap:
+          defaultMode: 0644
+          name: redis-certs
+      - name: redis-config
+        configMap:
+          defaultMode: 0644
+          name: redis-config
